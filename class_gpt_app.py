@@ -6,7 +6,7 @@ import os
 st.set_page_config(page_title="ClassGPT – AI Study Assistant", layout="centered")
 
 # Load OpenAI API key securely from environment variable
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("sk-e0bd33139597474f893e0a212a7e39aa")
 
 # App Title
 st.markdown("## 📚 ClassGPT – Your Smart Study Assistant")
@@ -20,7 +20,7 @@ with st.sidebar:
     st.markdown("💡 Try topics like *Photosynthesis*, *The Internet*, or *Algebra*.")
 
 # Main input section
-topic = st.text_input("✍️ Enter a topic you’d like to study:")
+topic = st.text_input("✍️ Enter a topic you wil like to study:")
 
 if st.button("Get Response") and topic:
     st.markdown("⏳ Processing... Please wait.")
