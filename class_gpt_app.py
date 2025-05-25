@@ -6,7 +6,7 @@ import os
 st.set_page_config(page_title="ClassGPT – AI Study Assistant", layout="centered")
 
 # Load OpenAI API key securely from environment variable
-openai.api_key = os.getenv("sk-e0bd33139597474f893e0a212a7e39aa")
+openai.api_key = os.getenv("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")
 
 # App Title
 st.markdown("## 📚 ClassGPT – Your Smart Study Assistant")
