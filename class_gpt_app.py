@@ -33,15 +33,17 @@ if st.button("Get Response") and topic:
     }
 
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful and multilingual AI tutor for students."},
-                {"role": "user", "content": prompt_map[task]}
-            ]
-        )
-        result = response['choices'][0]['message']['content']
+        
+         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+         response = client.chat.completions.create(
+         model="gpt-3.5-turbo",
+         messages=[
+           {"role": "system", "content": "You are a helpful AI tutor."},
+           {"role": "user", "content": prompt}
+                 ]
+            )
+        output = response.choices[0].message.content
         st.success("✅ Here's your result:")
         st.write(result)
         st.code(result, language='markdown')
