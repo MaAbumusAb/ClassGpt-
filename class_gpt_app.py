@@ -167,8 +167,7 @@ if st.button(current_lang_texts["get_response_button"]) and topic:
             ],
             max_tokens=700, # Using max_tokens for this client's create method
             temperature=0.7,
-            top_p=0.9,
-            do_sample=True # It's common to explicitly set do_sample=True for generative models
+            top_p=0.9
         )
         
         # Extract the response from the completion object
