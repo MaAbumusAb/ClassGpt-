@@ -24,7 +24,7 @@ if not HF_API_KEY:
     st.stop() # Stop the Streamlit app if the key is missing
 
 # Set up page configuration
-st.set_config_config(page_title="ClassGPT – AI Study Assistant", layout="centered")
+st.set_page_config(page_title="ClassGPT – AI Study Assistant", layout="centered")
 
 # --- Internationalization (i18n) for UI Labels ---
 # A basic dictionary-based approach for UI text translations.
