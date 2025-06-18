@@ -11,7 +11,7 @@ import json
 # export HF_LLAMA3_MODEL="meta-llama/Llama-3-8b-instruct" # Or "meta-llama/Llama-3-70b-instruct"
 
 HF_API_KEY = os.getenv("HF_API_KEY")
-HF_LLAMA3_MODEL = os.getenv("HF_LLAMA3_MODEL", "meta-llama/Llama-3-8b-instruct") # Default to 8B instruct
+HF_LLAMA3_MODEL = os.getenv("HF_LLAMA3_MODEL", "meta-llama/Llama-3-8B-instruct") # Default to 8B instruct
 
 # The Hugging Face Inference API endpoint for chat completions
 # This format is common for models that support the OpenAI-like chat API
