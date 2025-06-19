@@ -83,7 +83,7 @@ Once your environment variables are set and dependencies are installed, run the 
 
 ```bash
 streamlit run main.py
-
+```
 Your ClassGPT app should open in your web browser.
 🌐 Deployment (Streamlit Cloud)
 If you're deploying ClassGPT to Streamlit Cloud, here's how to securely set your API token:
@@ -117,7 +117,7 @@ Please ensure your code adheres to best practices and includes tests where appro
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 📧 Contact
- * Muhammad Auwal Aliyu - aliyumuhammadauwal92@gmail.com
+ * Muhammad Auwal Aliyu(Abu Mus'ab) - aliyumuhammadauwal92@gmail.com
  * Project Link: https://github.com/MaAbumusAb/ClassGpt-
-https://classgpt1.streamlit.app/
+
 
