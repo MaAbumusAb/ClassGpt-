@@ -20,7 +20,7 @@ if not HF_API_KEY:
 try:
     hf_client = InferenceClient(
         provider="sambanova", # Confirm this provider is correct for your model access
-        api_key=HF_API_TOKEN,
+        api_key=HF_API_KEY,
     )
 except Exception as e:
     st.error(f"Failed to initialize Hugging Face Inference Client. Please check your HF_TOKEN and provider settings: {e}")
