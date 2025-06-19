@@ -20,7 +20,7 @@ if not HF_API_KEY:
 try:
     hf_client = InferenceClient(
         provider="sambanova", # Confirm this provider is correct for your model access
-        api_key=HF_API_KEY,
+        api_key=HF_API_KEY, # Use HF_API_KEY, not HF_API_TOKEN
     )
 except Exception as e:
     st.error(f"Failed to initialize Hugging Face Inference Client. Please check your HF_TOKEN and provider settings: {e}")
@@ -122,8 +122,10 @@ translations = {
 # Ensure session states are initialized
 if "selected_language" not in st.session_state:
     st.session_state.selected_language = "English"
-if "selected_level" not in st.session_state: # NEW: Initialize selected_level
-    st.session_state.selected_level = translations["English"]["level_secondary"] # Default to Secondary
+# NEW: Initialize selected_level_index
+if "selected_level_index" not in st.session_state:
+    st.session_state.selected_level_index = 1 # Default to Secondary (index 1)
+
 if "quiz_data" not in st.session_state:
     st.session_state.quiz_data = None
 if "quiz_answers" not in st.session_state:
@@ -151,9 +153,11 @@ with st.sidebar:
     )
     if new_lang_selection != st.session_state.selected_language:
         st.session_state.selected_language = new_lang_selection
-        st.session_state.quiz_data = None # Clear quiz if language changes
+        # Clear quiz data and reset level index on language change to prevent mismatch errors
+        st.session_state.quiz_data = None 
         st.session_state.quiz_submitted = False
-        st.rerun()
+        st.session_state.selected_level_index = 1 # Reset level to default (Secondary) on lang change
+        st.rerun() 
 
     # Level selection - uses the NEW translation keys
     educational_levels = [
@@ -161,16 +165,20 @@ with st.sidebar:
         current_lang_texts["level_secondary"],
         current_lang_texts["level_tertiary"]
     ]
-    new_level_selection = st.selectbox(
+    new_level_selection_text = st.selectbox(
         current_lang_texts["level_label"],
         options=educational_levels,
-        index=educational_levels.index(st.session_state.selected_level) # Maintain previous selection
+        index=st.session_state.selected_level_index # Use the stored index here
     )
-    if new_level_selection != st.session_state.selected_level:
-        st.session_state.selected_level = new_level_selection
+    
+    # Store the new index if the selection changes
+    new_level_index = educational_levels.index(new_level_selection_text)
+    if new_level_index != st.session_state.selected_level_index:
+        st.session_state.selected_level_index = new_level_index # Store the INDEX
         st.session_state.quiz_data = None # Clear quiz if level changes
         st.session_state.quiz_submitted = False
-        st.rerun()
+        st.rerun() # Trigger rerun to update prompts with new level
+
 
     task = st.selectbox(current_lang_texts["select_task_label"],
                         [current_lang_texts["explain_it"], current_lang_texts["generate_quiz"], current_lang_texts["summarize_topic"]])
@@ -185,10 +193,11 @@ with st.sidebar:
             value=1,
             step=1
         )
-        if st.session_state.get('last_num_questions') != num_questions:
-             st.session_state.quiz_data = None # Clear quiz if number of questions changes
+        # Clear quiz if number of questions changes, only if not just initialized
+        if st.session_state.get('last_num_questions') is not None and st.session_state.last_num_questions != num_questions:
+             st.session_state.quiz_data = None 
              st.session_state.quiz_submitted = False
-             st.session_state.last_num_questions = num_questions
+        st.session_state.last_num_questions = num_questions
 
 
 # Main input section
@@ -239,26 +248,33 @@ if st.button(current_lang_texts["get_response_button"]) and topic:
     st.session_state.quiz_answers = {}
     st.session_state.quiz_submitted = False
 
-    # Retrieve the selected educational level
-    selected_education_level = st.session_state.selected_level
+    # Retrieve the selected educational level text from the current language's list
+    # Use the stored index to get the correct text for the prompt
+    educational_levels_current_lang = [
+        current_lang_texts["level_primary"],
+        current_lang_texts["level_secondary"],
+        current_lang_texts["level_tertiary"]
+    ]
+    selected_education_level_text = educational_levels_current_lang[st.session_state.selected_level_index]
+
 
     # Prepare the prompt
-    # System prompt is now dependent on selected_education_level
+    # System prompt is now dependent on selected_education_level_text
     system_prompt_template = f"""You are ClassGPT, an expert educational tutor and assistant.
 Your primary goal is to provide clear, concise, and accurate educational content for students.
 You are fluent in English, Hausa, and Arabic.
 Strictly adhere to the requested output language. **Do NOT include any English words or phrases in your output unless they are proper nouns (e.g., 'Google', 'Nigeria') or universally accepted scientific terms without a common translation.**
-Explain concepts in simple terms suitable for learners at a {selected_education_level} level.
+Explain concepts in simple terms suitable for learners at a {selected_education_level_text} level.
 """
     prompt_map = {
         current_lang_texts["explain_it"]: f"""Explain the topic '{topic}' in simple and easy-to-understand terms.
-Ensure the explanation is appropriate for a {selected_education_level} student level.
+Ensure the explanation is appropriate for a {selected_education_level_text} student level.
 Use clear and concise sentences.
 Provide concrete examples relevant to everyday life in Nigeria if applicable.
 The entire explanation MUST be in {st.session_state.selected_language}.
 """,
         current_lang_texts["generate_quiz"]: f"""Generate exactly {num_questions} multiple-choice questions about the topic '{topic}'.
-Ensure questions are appropriate for a {selected_education_level} student level.
+Ensure questions are appropriate for a {selected_education_level_text} student level.
 Each question and all its options MUST be in {st.session_state.selected_language}.
 For each question, provide 4 options, labeled A, B, C, D.
 After the options for each question, explicitly state the correct answer on a new line in the format: "Correct Answer: [Option Letter]".
@@ -267,6 +283,7 @@ DO NOT provide explanations for the answers or any additional text apart from th
 Example Format for a single question:
 1. What is the capital of France?
 A) Berlin
+B) Paris
 B) Paris
 C) Rome
 D) Madrid
@@ -280,7 +297,7 @@ D) Venus
 Correct Answer: C
 """,
         current_lang_texts["summarize_topic"]: f"""Provide a concise summary of the topic '{topic}'.
-Focus only on the most critical information relevant to a {selected_education_level} student.
+Focus only on the most critical information relevant to a {selected_education_level_text} student.
 The summary MUST be in {st.session_state.selected_language}.
 Keep the summary to a maximum of 150 words or 3 paragraphs, whichever is shorter.
 """
@@ -349,7 +366,7 @@ if st.session_state.quiz_data and not st.session_state.quiz_submitted:
             # Extract just the option letter (A, B, C, D) from the user's selection
             st.session_state.quiz_answers = {k: v.split(')')[0] if v else None for k, v in user_answers.items()}
             st.session_state.quiz_submitted = True
-            st.experimental_rerun() # Rerun to show results
+            st.rerun() # Rerun to show results
 
 # --- Display Quiz Results ---
 if st.session_state.quiz_data and st.session_state.quiz_submitted:
@@ -387,5 +404,4 @@ if st.session_state.quiz_data and st.session_state.quiz_submitted:
         st.session_state.quiz_data = None
         st.session_state.quiz_answers = {}
         st.session_state.quiz_submitted = False
-        st.experimental_rerun()
-
+        st.rerun()
