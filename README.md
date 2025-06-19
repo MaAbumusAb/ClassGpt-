@@ -96,7 +96,7 @@ If you're deploying ClassGPT to Streamlit Cloud, here's how to securely set your
  * For "Value", paste your actual Hugging Face API token.
  * Click "Save secret".
  * Redeploy your app (or wait for automatic redeployment).
-🗺️ Future Vision & Roadmap
+##🗺️ Future Vision & Roadmap
 ClassGPT is just getting started! Our ambitious roadmap includes:
  * Expanded Language Support: Integrating Pidgin and refining performance for Hausa and Arabic.
  * Curriculum Alignment: Developing structured content aligned with specific educational curricula in Nigeria.
