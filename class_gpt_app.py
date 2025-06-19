@@ -157,9 +157,9 @@ with st.sidebar:
 
     # Level selection - uses the NEW translation keys
     educational_levels = [
-        current_lang_texts["Primary School (Ages 6-12)"],
-        current_lang_texts["Secondary School (Ages 13-18)"],
-        current_lang_texts["Tertiary/University (Ages 18+)"]
+        current_lang_texts["level_primary"],
+        current_lang_texts["level_secondary"],
+        current_lang_texts["level_tertiary"]
     ]
     new_level_selection = st.selectbox(
         current_lang_texts["level_label"],
