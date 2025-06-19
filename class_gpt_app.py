@@ -5,7 +5,7 @@ import json
 import re # For parsing quiz output
 
 # --- Configuration for Hugging Face LLaMA 3 Inference API ---
-HF_API_KEY = os.getenv("HF_API_KEY")
+HF_API_KEY = os.getenv("HF_TOKEN")
 HF_LLAMA3_MODEL = os.getenv("HF_LLAMA3_MODEL", "meta-llama/Llama-3-8b-instruct")
 
 # The Hugging Face Inference API endpoint for chat completions
