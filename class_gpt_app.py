@@ -153,7 +153,7 @@ with st.sidebar:
         st.session_state.selected_language = new_lang_selection
         st.session_state.quiz_data = None # Clear quiz if language changes
         st.session_state.quiz_submitted = False
-        st.experimental_rerun()
+        st.rerun()
 
     # Level selection - uses the NEW translation keys
     educational_levels = [
@@ -170,7 +170,7 @@ with st.sidebar:
         st.session_state.selected_level = new_level_selection
         st.session_state.quiz_data = None # Clear quiz if level changes
         st.session_state.quiz_submitted = False
-        st.experimental_rerun()
+        st.rerun()
 
     task = st.selectbox(current_lang_texts["select_task_label"],
                         [current_lang_texts["explain_it"], current_lang_texts["generate_quiz"], current_lang_texts["summarize_topic"]])
