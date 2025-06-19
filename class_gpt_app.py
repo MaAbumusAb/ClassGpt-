@@ -6,7 +6,7 @@ import re # For parsing quiz output
 
 # --- Configuration for Hugging Face LLaMA 3 Inference API ---
 HF_API_KEY = os.getenv("HF_TOKEN")
-HF_LLAMA3_MODEL = os.getenv("HF_LLAMA3_MODEL", "meta-llama/Llama-3-8B-instruct")
+HF_LLAMA3_MODEL = os.getenv("HF_LLAMA3_MODEL", "meta-llama/Llama-3.1-8B-Instruct") 
 
 # The Hugging Face Inference API endpoint for chat completions
 LLAMA3_API_ENDPOINT = f"https://api-inference.huggingface.co/models/{HF_LLAMA3_MODEL}"
