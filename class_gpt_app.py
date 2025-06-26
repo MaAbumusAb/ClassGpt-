@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as sT
 import os
 from huggingface_hub import InferenceClient
 import json
