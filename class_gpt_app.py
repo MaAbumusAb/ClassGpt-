@@ -43,7 +43,7 @@ translations = {
         "explain_it": "Explain It",
         "generate_quiz": "Generate Quiz",
         "summarize_topic": "Summarize Topic",
-        "try_topics_tip": "💡 Try topics like *Photosynthesis*, *The Internet*, or *Algebra*.",
+        "try_topics_tip": "💡 Try topics like *Photosynthesis*, *History*, *The Internet*, or *Algebra*.",
         "enter_topic_prompt": "✍️ Enter a topic you’d like to study:",
         "num_questions_label": "Number of Quiz Questions",
         "get_response_button": "Get Response",
@@ -61,7 +61,7 @@ translations = {
     },
     "Hausa": {
         "app_title": "📚 ClassGPT – Mataimakin Nazari Mai Kaifin Hankali",
-        "tagline": "Fassara batutuwa, ƙirƙira tambayoyi, da taƙaita abubuwa a Turanci, Hausa, ko Larabci!",
+        "tagline": "Fassara batutuwa, ƙirƙirar tambayoyi, da taƙaita abubuwa ko bayabai a Turanci, Hausa, ko Larabci!", #Edited
         "settings_header": "⚙️ Saituna",
         "output_language_label": "Zaɓi Harshen Fita",
         "select_task_label": "Zaɓi Aiki",
@@ -70,20 +70,20 @@ translations = {
         "level_secondary": "Makarantar Sakandare (Shekaru 13-18)", # NEW
         "level_tertiary": "Jami'a/Manyan Makarantu (Shekaru 18+)", # NEW
         "explain_it": "Fassara",
-        "generate_quiz": "Ƙirƙira Tambaya",
-        "summarize_topic": "Taƙaita Batu",
-        "try_topics_tip": "💡 Gwada batutuwa kamar *Photosynthesis*, *Intanet*, ko *Algebra*.",
+        "generate_quiz": "Ƙirƙiri Tambaya", #Edited
+        "summarize_topic": "Taƙaita Bayani", 
+        "try_topics_tip": "💡 Gwada batutuwa kamar *Photosynthesis*, *History*, *Intanet*, ko *Algebra*.",
         "enter_topic_prompt": "✍️ Shigar da batu da kake son karantawa:",
-        "num_questions_label": "Adadin Tambayoyin Jarrabawa",
+        "num_questions_label": "Adadin Tambayoyin Da Akeson Jarrabawa", #Edited
         "get_response_button": "Samo Amsa",
-        "submit_quiz_button": "Aika Amsoshin Jarrabawa",
-        "processing_message": "⏳ Ana aiwatarwa... Don Allah a jira...",
+        "submit_quiz_button": "Aika Tambayoyin Da Akeson Jarrabawa",
+        "processing_message": "⏳ Ana kan aiwatarwa da umarnin... Don Allah a jira...", #Edited
         "success_message": "✅ Ga sakamakon ka:",
         "quiz_score": "📊 Sakamakon Jarrabawar ka:",
         "quiz_correct_answer": "Amsa Daidai:",
         "your_answer": "Amsar ka:",
-        "error_api_issue": "Akwai matsala da Hugging Face API. Don Allah a bincika makullin API ɗinka, damar samun samfurin, ko hanyar sadarwa.",
-        "error_parse_issue": "An sami tsarin amsa da ba a tsammani daga API. Tsarin jarrabawa ya gagara.",
+        "error_api_issue": "Akwai matsala da Hugging Face API. Don Allah ka/ki bincika makullin API ɗinka, damar samun samfurin, ko hanyar sadarwa.",
+        "error_parse_issue": "An sami tsarin amsa da ba a tsammace ce taba daga API. Tsarin jarrabawar ya gagara. Don Allah Ayi Hakuri", #Edited
         "error_general": "Akwai matsala gabaɗaya.",
         "start_info": "Shigar da batu sannan ka danna 'Samo Amsa' don farawa.",
         "quote": "> 💡 *“Ilimi shine fasfo zuwa gaba, domin gobe ta waɗanda suka shirya mata a yau.”*"
